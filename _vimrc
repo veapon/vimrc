@@ -5,8 +5,46 @@
 " Contact : veapon88@gmail.com
 " Version : for gvim
 "
-"Disable VI compatible mode
-set nocompatible
+set nocompatible              
+filetype off                  
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+Plugin 'mattn/emmet-vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'bling/vim-airline'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'tomasr/molokai'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'ervandew/supertab'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            
+filetype plugin indent on    
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 "Disable GUI Toolbar and Menubar
 set guioptions-=T
@@ -20,6 +58,7 @@ set termencoding=utf-8
 set encoding=prc
 set fileencoding=utf-8
 set fileencodings=cs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set fileformat=unix
 set guifont=consolas:h10.5
 set langmenu=zh_CN.UTF-8
 set helplang=cn
@@ -62,6 +101,8 @@ let NERDTreeChristmasTree = 1
 let NERDTreeMouseMode = 1
 let NERDTreeShowBookmarks = 1
 let NERDTreeWinSize = 25
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['\.$', '\.\.$']
 
 "=====================Taglist confi=======================
 map <F8> :TlistToggle <cr>
@@ -72,20 +113,18 @@ let Tlist_Show_One_File = 1
 let Tlist_Auto_Open = 1
 let tlist_php_settings='php;c:Classes;f:Functions;d:Constants;j:Javascript Functions'
 
-
-
 "===================PHP Function AutoComplete============
-set dictionary-=C:\\Program\ Files\ (x86)\\Vim\\php_func_list.txt dictionary+=C:\\Program\ Files\ (x86)\\Vim\\php_func_list.txt
-set complete-=k complete+=k
-function! InserTabWrapper()
-	let col = col('.')-1
-	if !col || getline('.')[col-1] !~ '\k'
-		return "\<TAB>"
-	else
-		return "\<C-N>"
-	endif
-endfunction
-inoremap <TAB> <C-R>=InserTabWrapper()<cr>
+"set dictionary-=C:\\Program\ Files\ (x86)\\Vim\\php_func_list.txt dictionary+=C:\\Program\ Files\ (x86)\\Vim\\php_func_list.txt
+"set complete-=k complete+=k
+"function! InserTabWrapper()
+"	let col = col('.')-1
+"	if !col || getline('.')[col-1] !~ '\k'
+"		return "\<TAB>"
+"	else
+"		return "\<C-N>"
+"	endif
+"endfunction
+"inoremap <TAB> <C-R>=InserTabWrapper()<cr>
 
 set tags=tags;
 set autochdir
@@ -111,37 +150,3 @@ function! Da()
 endfunction
 
 
-func CompileRun()
-exec "w"
-"C程序
-if &filetype == 'c'
-exec "!gcc -Wl,-enable-auto-import % -g -o %<.exe"
-"c++程序
-elseif &filetype == 'cpp'
-exec "!g++ -Wl,-enable-auto-import % -g -o %<.exe"
-endif
-endfunc
-"结束定义CompileRun
-"定义Run函数
-func Run()
-if &filetype == 'c' || &filetype == 'cpp'
-exec "!%<.exe"
-endif
-endfunc
-"结束定义Run
-
-"定义Debug函数，用来调试程序
-func Debug()
-exec "w"
-"C程序
-if &filetype == 'c'
-exec "!gcc % -g -o %<.exe"
-exec "!gdb %<.exe"
-elseif &filetype == 'cpp'
-exec "!g++ % -g -o %<.exe"
-exec "!gdb %<.exe"
-endif
-endfunc
-"结束定义Debug
-
-map <F5> :call CompileRun()<CR>
