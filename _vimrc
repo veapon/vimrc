@@ -32,6 +32,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/comments.vim'
 Plugin 'godlygeek/tabular'
+Plugin 'DoxygenToolkit.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
