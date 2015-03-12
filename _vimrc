@@ -32,11 +32,11 @@ Plugin 'tpope/vim-surround'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/comments.vim'
 Plugin 'godlygeek/tabular'
-Plugin 'DoxygenToolkit.vim'
+Plugin 'veapon/vimDoxygenToolkit'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
-filetype plugin indent on    
+filetype plugin on    
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -113,7 +113,7 @@ let Tlist_Use_Right_Window = 1
 let Tlist_WinWidth = 25
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Show_One_File = 1
-let Tlist_Auto_Open = 1
+let Tlist_Auto_Open = 0
 let tlist_php_settings='php;c:Classes;f:Functions;d:Constants;j:Javascript Functions'
 
 "===================PHP Function AutoComplete============
@@ -136,7 +136,8 @@ set runtimepath+=C:\\Program\ Files\ (x86)\\Vim\\phpmunual
 autocmd BufNewFile,Bufread *.php,*.php3,*.php4 set keywordprg="help"
 
 "===================Doxygen===============
-let g:DoxygenToolkit_copyrightString = "luoo.net"
+"===================Doxygen===============
+let g:DoxygenToolkit_copyrightString = "veapon88@gmail.com"
 let g:DoxygenToolkit_authorName="veapon"
 let g:DoxygenToolkit_briefTag_funcName="yes"
 let g:DoxygenToolkit_compactDoc="yes"
