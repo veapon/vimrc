@@ -34,6 +34,7 @@ Plugin 'vim-scripts/comments.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'veapon/vimDoxygenToolkit'
 Plugin 'fatih/vim-go'
+Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
@@ -117,26 +118,11 @@ let Tlist_Show_One_File = 1
 let Tlist_Auto_Open = 0
 let tlist_php_settings='php;c:Classes;f:Functions;d:Constants;j:Javascript Functions'
 
-"===================PHP Function AutoComplete============
-"set dictionary-=C:\\Program\ Files\ (x86)\\Vim\\php_func_list.txt dictionary+=C:\\Program\ Files\ (x86)\\Vim\\php_func_list.txt
-"set complete-=k complete+=k
-"function! InserTabWrapper()
-"	let col = col('.')-1
-"	if !col || getline('.')[col-1] !~ '\k'
-"		return "\<TAB>"
-"	else
-"		return "\<C-N>"
-"	endif
-"endfunction
-"inoremap <TAB> <C-R>=InserTabWrapper()<cr>
-
 set tags=tags;
 set autochdir
-
 set runtimepath+=C:\\Program\ Files\ (x86)\\Vim\\phpmunual 
 autocmd BufNewFile,Bufread *.php,*.php3,*.php4 set keywordprg="help"
 
-"===================Doxygen===============
 "===================Doxygen===============
 let g:DoxygenToolkit_copyrightString = ""
 let g:DoxygenToolkit_authorName="veapon(veapon88@gmail.com)"
@@ -147,7 +133,6 @@ map <F10> :Dox <cr>
 
 map <C-s> :w <cr>
 map <F4> :cw <cr>
-map <F12> :!firefox -l %<cr>
 map da :call Da()<cr>
 
 function! Da()
