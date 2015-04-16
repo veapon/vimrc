@@ -1,0 +1,1 @@
+--regex-php=/@todo(.+)/\1/t,todo/i
