@@ -34,6 +34,7 @@ Plugin 'vim-scripts/comments.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'veapon/vimDoxygenToolkit'
 Plugin 'fatih/vim-go'
+Plugin 'tomtom/checksyntax_vim'
 " Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
@@ -108,6 +109,8 @@ let NERDTreeShowBookmarks = 1
 let NERDTreeWinSize = 25
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.$', '\.\.$']
+autocmd vimenter * NERDTree /data/www
+autocmd BufEnter * silent! chdir /data/www
 
 "=====================Taglist confi=======================
 map <F8> :TlistToggle <cr>
@@ -138,5 +141,3 @@ map da :call Da()<cr>
 function! Da()
 	exec "normal a" . strftime("%Y-%m-%d")
 endfunction
-
-
