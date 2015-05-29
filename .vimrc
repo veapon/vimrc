@@ -35,6 +35,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'veapon/vimDoxygenToolkit'
 Plugin 'fatih/vim-go'
 Plugin 'tomtom/checksyntax_vim'
+Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
@@ -109,7 +110,14 @@ let NERDTreeShowBookmarks = 1
 let NERDTreeWinSize = 25
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.$', '\.\.$']
+
+" open NERDTree automatically
 autocmd vimenter * NERDTree /data/www
+
+" set cursor to left window
+autocmd vimenter * wincmd l
+
+" set current work dir
 autocmd BufEnter * silent! chdir /data/www
 
 "=====================Taglist confi=======================
@@ -141,3 +149,23 @@ map da :call Da()<cr>
 function! Da()
 	exec "normal a" . strftime("%Y-%m-%d")
 endfunction
+
+"================easymotion
+let mapleader=" "
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-s)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
