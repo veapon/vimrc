@@ -111,14 +111,14 @@ let NERDTreeWinSize = 25
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.$', '\.\.$']
 
-" open NERDTree automatically
-autocmd vimenter * NERDTree /data/www
-
-" set cursor to left window
-autocmd vimenter * wincmd l
-
-" set current work dir
-autocmd BufEnter * silent! chdir /data/www
+if has('gui_running')
+	" open NERDTree automatically
+	autocmd vimenter * NERDTree /data/www
+	" set cursor to left window
+	autocmd vimenter * wincmd l
+	" set current work dir
+	autocmd BufEnter * silent! chdir /data/www
+endif
 
 "=====================Taglist confi=======================
 map <F8> :TlistToggle <cr>
