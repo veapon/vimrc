@@ -139,7 +139,8 @@ let g:DoxygenToolkit_copyrightString = ""
 let g:DoxygenToolkit_authorName="veapon(veapon88@gmail.com)"
 let g:DoxygenToolkit_briefTag_funcName="yes"
 let g:DoxygenToolkit_compactDoc="yes"
-let g:DoxygenToolkit_sinceTag="no"
+let g:DoxygenToolkit_versionString=""
+let g:DoxygenToolkit_sinceTag=""
 let g:DoxygenToolkit_showFuncAuthor="yes"
 map <F9> :ClassDox <cr>
 map <F10> :Dox <cr>
