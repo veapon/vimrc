@@ -146,7 +146,7 @@ map <F9> :ClassDox <cr>
 map <F10> :Dox <cr>
 
 map <C-s> :w <cr>
-map <F4> :cw <cr>
+map <F4> :bo cw <cr>
 map da :call Da()<cr>
 
 function! Da()
@@ -172,3 +172,8 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
+if exists(":Tabularize")
+	nmap <Leader>t :Tabularize /=><CR>
+	vmap <Leader>t :Tabularize /=><CR>
+endif
