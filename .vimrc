@@ -26,7 +26,7 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'bling/vim-airline'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'tomasr/molokai'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'ervandew/supertab'
@@ -34,13 +34,23 @@ Plugin 'vim-scripts/comments.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'veapon/vimDoxygenToolkit'
 Plugin 'fatih/vim-go'
-Plugin 'tomtom/checksyntax_vim'
+"Plugin 'tomtom/checksyntax_vim'
 Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
+Plugin 'JulesWang/css.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'spf13/PIV'
+Plugin 'pearofducks/ansible-vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
-filetype plugin on    
+
+"filetype plugin on    
+"filetype indent on    
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -58,7 +68,7 @@ set guioptions-=T
 set guioptions-=m
 
 "Color Scheme
-colorscheme molokai 
+colorscheme molokai
 
 "Font and encoding
 set termencoding=utf-8
@@ -81,6 +91,11 @@ set mouse=a
 set backspace=indent,eol,start
 set magic
 set hlsearch
+set cursorline
+set cursorcolumn
+set expandtab
+set tabstop=4
+set shiftwidth=4
 
 "disable tmp file
 set nobackup
@@ -109,6 +124,7 @@ let NERDTreeMouseMode = 1
 let NERDTreeShowBookmarks = 1
 let NERDTreeWinSize = 25
 let NERDTreeShowHidden = 1
+let NERDTreeChDirMode = 2
 let NERDTreeIgnore = ['\.$', '\.\.$']
 
 if has('gui_running')
@@ -136,11 +152,10 @@ set autochdir
 
 "===================Doxygen===============
 let g:DoxygenToolkit_copyrightString = ""
-let g:DoxygenToolkit_authorName="veapon(veapon88@gmail.com)"
+let g:DoxygenToolkit_authorName="lwp"
 let g:DoxygenToolkit_briefTag_funcName="yes"
 let g:DoxygenToolkit_compactDoc="yes"
 let g:DoxygenToolkit_sinceTag="no"
-let g:DoxygenToolkit_createTag="@create "
 let g:DoxygenToolkit_showFuncAuthor="yes"
 map <F9> :ClassDox <cr>
 map <F10> :Dox <cr>
