@@ -46,11 +46,22 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'mileszs/ack.vim'
 "Plugin 'Shougo/neocomplete.vim'
 Plugin 'fatih/vim-go'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'tomtom/checksyntax_vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'majutsushi/tagbar'
+Plugin 'JulesWang/css.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'spf13/PIV'
+Plugin 'pearofducks/ansible-vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
+
+"filetype plugin on    
+"filetype indent on    
 
 " To ignore plugin indent changes, instead use:
 filetype plugin on
