@@ -19,30 +19,41 @@ Plugin 'gmarik/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-Plugin 'mattn/emmet-vim'
+"Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'bling/vim-airline'
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'tomasr/molokai'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/comments.vim'
+Plugin 'bling/vim-airline'
+"Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'tomasr/molokai'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-surround'
+"Plugin 'ervandew/supertab'
+"Plugin 'scrooloose/nerdcommenter'
 Plugin 'godlygeek/tabular'
 Plugin 'veapon/vimDoxygenToolkit'
+"Plugin 'tomtom/checksyntax_vim'
+"Plugin 'Lokaltog/vim-easymotion'
+Plugin 'majutsushi/tagbar'
+"Plugin 'JulesWang/css.vim'
+"Plugin 'rizzatti/dash.vim'
+"Plugin 'Raimondi/delimitMate'
+"Plugin 'spf13/PIV'
+"Plugin 'pearofducks/ansible-vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'mileszs/ack.vim'
+"Plugin 'Shougo/neocomplete.vim'
 Plugin 'fatih/vim-go'
-Plugin 'tomtom/checksyntax_vim'
-Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'majutsushi/tagbar'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-syntastic/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            
-filetype plugin on    
+
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -54,11 +65,10 @@ filetype plugin on
 " Put your non-Plugin stuff after this line
 
 "Disable GUI Toolbar and Menubar
-set guioptions-=T
-set guioptions-=m
+set guioptions=
 
 "Color Scheme
-colorscheme molokai 
+colorscheme molokai
 
 "Font and encoding
 set termencoding=utf-8
@@ -75,20 +85,25 @@ set nobomb
 syntax on
 set number
 set autoindent
-set cindent
+set cindent cino=j1,(0,ws,Ws
 set history=1000
 set mouse=a
 set backspace=indent,eol,start
 set magic
 set hlsearch
+set cursorline
+set cursorcolumn
+set expandtab
+set tabstop=4
+set shiftwidth=4
 
 "disable tmp file
 set nobackup
 set noswapfile
 
 " switch tab
-map <S-n> :tabn <cr>
-map <S-p> :tabp <cr>
+"map <S-n> :tabn <cr>
+"map <S-p> :tabp <cr>
 
 "====================miniBufer config====================
 let g:miniBufExplTabWrap = 1
@@ -109,6 +124,7 @@ let NERDTreeMouseMode = 1
 let NERDTreeShowBookmarks = 1
 let NERDTreeWinSize = 25
 let NERDTreeShowHidden = 1
+let NERDTreeChDirMode = 2
 let NERDTreeIgnore = ['\.$', '\.\.$']
 
 if has('gui_running')
@@ -120,14 +136,15 @@ if has('gui_running')
 	autocmd BufEnter * silent! chdir /data/www
 endif
 
-"=====================Taglist confi=======================
+"=====================Taglist config=======================
 map <F8> :TlistToggle <cr>
 let Tlist_Use_Right_Window = 1
 let Tlist_WinWidth = 25
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Show_One_File = 1
-let Tlist_Auto_Open = 0
-let tlist_php_settings='php;c:Classes;f:Functions;d:Constants;t:Todo;j:Javascript Functions'
+let Tlist_Auto_Open = 1
+let tlist_php_settings='php;c:Classes;f:Functions;d:Constants;t:Todo'
+let tlist_go_settings = 'go;g:enum;s:struct;u:union;t:type;f:function'
 
 set tags=tags;
 set autochdir
@@ -136,11 +153,10 @@ set autochdir
 
 "===================Doxygen===============
 let g:DoxygenToolkit_copyrightString = ""
-let g:DoxygenToolkit_authorName="veapon(veapon88@gmail.com)"
+let g:DoxygenToolkit_authorName="lwp"
 let g:DoxygenToolkit_briefTag_funcName="yes"
 let g:DoxygenToolkit_compactDoc="yes"
 let g:DoxygenToolkit_sinceTag="no"
-let g:DoxygenToolkit_createTag="@create "
 let g:DoxygenToolkit_showFuncAuthor="yes"
 map <F9> :ClassDox <cr>
 map <F10> :Dox <cr>
@@ -177,3 +193,26 @@ if exists(":Tabularize")
 	nmap <Leader>t :Tabularize /=><CR>
 	vmap <Leader>t :Tabularize /=><CR>
 endif
+
+set nofoldenable
+
+" vim-go
+let g:go_fmt_command = "goimports"
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+
+" YouCompleteMe
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" automate source the .vimrc file
+autocmd BufWritePost .vimrc so %
