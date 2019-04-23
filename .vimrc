@@ -1,68 +1,40 @@
-" Description : Veapon's Vim config file
+" Description : veapon's Vim config file
 " Create : 2011-4-10
 " Last Update : 2011-5-25
 " Website : http://veapon.com
 " Contact : veapon88@gmail.com
-" Version : for gvim
 "
-set nocompatible              
-filetype off                  
+set nocompatible
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/comments.vim'
+Plug 'bling/vim-airline'
+Plug 'tomasr/molokai'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-surround'
+"Plug 'ervandew/supertab'
+"Plug 'scrooloose/nerdcommenter'
+Plug 'godlygeek/tabular'
+Plug 'veapon/vimDoxygenToolkit'
+"Plug 'tomtom/checksyntax_vim'
+"Plug 'Lokaltog/vim-easymotion'
+Plug 'majutsushi/tagbar'
+"Plug 'JulesWang/css.vim'
+"Plug 'rizzatti/dash.vim'
+"Plug 'Raimondi/delimitMate'
+"Plug 'spf13/PIV'
+"Plug 'pearofducks/ansible-vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'mileszs/ack.vim'
+Plug 'fatih/vim-go'
+Plug 'vim-syntastic/syntastic'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-"Plugin 'mattn/emmet-vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/comments.vim'
-Plugin 'bling/vim-airline'
-"Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'tomasr/molokai'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'tpope/vim-surround'
-"Plugin 'ervandew/supertab'
-"Plugin 'scrooloose/nerdcommenter'
-Plugin 'godlygeek/tabular'
-Plugin 'veapon/vimDoxygenToolkit'
-"Plugin 'tomtom/checksyntax_vim'
-"Plugin 'Lokaltog/vim-easymotion'
-Plugin 'majutsushi/tagbar'
-"Plugin 'JulesWang/css.vim'
-"Plugin 'rizzatti/dash.vim'
-"Plugin 'Raimondi/delimitMate'
-"Plugin 'spf13/PIV'
-"Plugin 'pearofducks/ansible-vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'mileszs/ack.vim'
-"Plugin 'Shougo/neocomplete.vim'
-Plugin 'fatih/vim-go'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            
-
-" To ignore plugin indent changes, instead use:
-filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+call plug#end()
 
 "Disable GUI Toolbar and Menubar
 set guioptions=
@@ -76,7 +48,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=cs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set fileformats=unix,dos
-set guifont=consolas:h11
+set guifont=menlo
 set langmenu=zh_CN.UTF-8
 set helplang=cn
 set nobomb
@@ -110,7 +82,7 @@ let g:miniBufExplTabWrap = 1
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1 
+let g:miniBufExplModSelTarget = 1
 let g:miniBufExplorerAutoUpdate = 1
 let g:miniBufExplorerMoreThanOne = 0
 nmap <F2> :bprev<CR>
@@ -118,7 +90,7 @@ nmap <F3> :bnext<CR>
 
 "=====================NERDTree config======================
 map <F6> :NERDTree <cr>
-map <F7> :NERDTree /data/www<cr>
+map <F7> :NERDTree ~/Workspace/www<cr>
 let NERDTreeChristmasTree = 1
 let NERDTreeMouseMode = 1
 let NERDTreeShowBookmarks = 1
@@ -129,11 +101,11 @@ let NERDTreeIgnore = ['\.$', '\.\.$']
 
 if has('gui_running')
 	" open NERDTree automatically
-	autocmd vimenter * NERDTree /data/www
+	autocmd vimenter * NERDTree ~/Workspace/www
 	" set cursor to left window
 	autocmd vimenter * wincmd l
 	" set current work dir
-	autocmd BufEnter * silent! chdir /data/www
+	autocmd BufEnter * silent! chdir ~/Workspace/www
 endif
 
 "=====================Taglist config=======================
@@ -148,8 +120,6 @@ let tlist_go_settings = 'go;g:enum;s:struct;u:union;t:type;f:function'
 
 set tags=tags;
 set autochdir
-"set runtimepath+=C:\\Program\ Files\ (x86)\\Vim\\phpmunual 
-"autocmd BufNewFile,Bufread *.php,*.php3,*.php4 set keywordprg="help"
 
 "===================Doxygen===============
 let g:DoxygenToolkit_copyrightString = ""
