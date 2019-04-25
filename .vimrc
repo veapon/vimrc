@@ -10,29 +10,29 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
 Plug 'fholgado/minibufexpl.vim'
-Plug 'vim-scripts/taglist.vim'
 Plug 'vim-scripts/comments.vim'
 Plug 'bling/vim-airline'
 Plug 'tomasr/molokai'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 "Plug 'tpope/vim-surround'
-"Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 "Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
 Plug 'veapon/vimDoxygenToolkit'
 "Plug 'tomtom/checksyntax_vim'
 "Plug 'Lokaltog/vim-easymotion'
 Plug 'majutsushi/tagbar'
-"Plug 'JulesWang/css.vim'
-"Plug 'rizzatti/dash.vim'
-"Plug 'Raimondi/delimitMate'
+Plug 'vim-php/tagbar-phpctags.vim'
 "Plug 'spf13/PIV'
 "Plug 'pearofducks/ansible-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mileszs/ack.vim'
 Plug 'fatih/vim-go'
 Plug 'vim-syntastic/syntastic'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
 call plug#end()
 
@@ -68,6 +68,7 @@ set cursorcolumn
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set nofoldenable
 
 "disable tmp file
 set nobackup
@@ -108,20 +109,13 @@ if has('gui_running')
 	autocmd BufEnter * silent! chdir ~/Workspace/www
 endif
 
-"=====================Taglist config=======================
-map <F8> :TlistToggle <cr>
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 25
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Show_One_File = 1
-let Tlist_Auto_Open = 1
-let tlist_php_settings='php;c:Classes;f:Functions;d:Constants;t:Todo'
-let tlist_go_settings = 'go;g:enum;s:struct;u:union;t:type;f:function'
+"===== TagBar
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_width = 30
+let g:deoplete#enable_at_startup = 1
+autocmd FileType * nested :call tagbar#autoopen(0)
 
-set tags=tags;
-set autochdir
-
-"===================Doxygen===============
+"===== Doxygen
 let g:DoxygenToolkit_copyrightString = ""
 let g:DoxygenToolkit_authorName="lwp"
 let g:DoxygenToolkit_briefTag_funcName="yes"
@@ -133,49 +127,25 @@ map <F10> :Dox <cr>
 
 map <C-s> :w <cr>
 map <F4> :bo cw <cr>
-map da :call Da()<cr>
 
+"===== Insert current date
+map da :call Da()<cr>
 function! Da()
 	exec "normal a" . strftime("%Y-%m-%d")
 endfunction
 
-"================easymotion
-let mapleader=" "
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Bi-directional find motion
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-s)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-s2)
-
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
+"===== Tabular
 if exists(":Tabularize")
 	nmap <Leader>t :Tabularize /=><CR>
 	vmap <Leader>t :Tabularize /=><CR>
 endif
 
-set nofoldenable
-
-" vim-go
+"===== vim-go
 let g:go_fmt_command = "goimports"
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 
-" YouCompleteMe
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
+"===== Airline
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -183,6 +153,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+"===== deoplete
+let g:deoplete#enable_at_startup = 1
 
 " automate source the .vimrc file
 autocmd BufWritePost .vimrc so %
